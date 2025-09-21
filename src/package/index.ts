@@ -34,4 +34,14 @@ export class ContractFirstAPIClient {
     public healthCheck() {
         return this.client.GET('/health-check');
     }
+
+    public pvpc = {
+        get: (date: Date) => {
+            const year = date.getFullYear();
+            const month = `${date.getMonth() + 1}`.padStart(2, '0');
+            const day = date.getDate();
+
+            return this.client.GET('/pvpc', { params: { query: { date: [year, month, day].join('-') } } });
+        }
+    }
 }
