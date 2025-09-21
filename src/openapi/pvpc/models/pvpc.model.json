@@ -1,10 +1,165 @@
 {
     "type": "object",
-    "required": [ "propertyA" ],
+    "required": [ "uuid", "createdAt", "updatedAt", "date", "general", "special" ],
     "additionalProperties": false,
     "properties": {
-        "propertyA": {
-            "type": "string"
+        "uuid": {
+            "type": "string",
+            "example": "c0a8433f-d6b1-4f38-a94a-2c9a0d0c1c4d"
+        },
+        "createdAt": {
+            "type": "number",
+            "example": "1679022000000"
+        },
+        "updatedAt": {
+            "type": "number",
+            "example": "1679022000000"
+        },
+        "date": {
+            "type": "string",
+            "example": "2025-09-22"
+        },
+        "general": {
+            "type": "object",
+            "required": [ "hours", "min", "max", "average" ],
+            "additionalProperties": false,
+            "properties": {
+                "hours": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [ "date", "hour", "price" ],
+                        "additionalProperties": false,
+                        "properties": {
+                            "date": {
+                                "type": "string",
+                                "example": "2025-09-21T22:00:00.000Z"
+                            },
+                            "hour": {
+                                "type": "number",
+                                "example": 0
+                            },
+                            "price": {
+                                "type": "number",
+                                "example": 99.81
+                            }
+                        }
+                    }
+                },
+                "min": {
+                    "type": "object",
+                    "required": [ "date", "hour", "price" ],
+                    "additionalProperties": false,
+                    "properties": {
+                        "date": {
+                            "type": "string",
+                            "example": "2025-09-21T22:00:00.000Z"
+                        },
+                        "hour": {
+                            "type": "number",
+                            "example": 14
+                        },
+                        "price": {
+                            "type": "number",
+                            "example": 77.58
+                        }
+                    }
+                },
+                "max": {
+                    "type": "object",
+                    "required": [ "date", "hour", "price" ],
+                    "additionalProperties": false,
+                    "properties": {
+                        "date": {
+                            "type": "string",
+                            "example": "2025-09-21T22:00:00.000Z"
+                        },
+                        "hour": {
+                            "type": "number",
+                            "example": 20
+                        },
+                        "price": {
+                            "type": "number",
+                            "example": 273.31
+                        }
+                    }
+                },
+                "average": {
+                    "type": "number",
+                    "example": 136.17625
+                }
+            }
+        },
+        "special": {
+            "type": "object",
+            "required": [ "hours", "min", "max", "average" ],
+            "additionalProperties": false,
+            "properties": {
+                "hours": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [ "date", "hour", "price" ],
+                        "additionalProperties": false,
+                        "properties": {
+                            "date": {
+                                "type": "string",
+                                "example": "2025-09-21T22:00:00.000Z"
+                            },
+                            "hour": {
+                                "type": "number",
+                                "example": 0
+                            },
+                            "price": {
+                                "type": "number",
+                                "example": 99.81
+                            }
+                        }
+                    }
+                },
+                "min": {
+                    "type": "object",
+                    "required": [ "date", "hour", "price" ],
+                    "additionalProperties": false,
+                    "properties": {
+                        "date": {
+                            "type": "string",
+                            "example": "2025-09-21T22:00:00.000Z"
+                        },
+                        "hour": {
+                            "type": "number",
+                            "example": 15
+                        },
+                        "price": {
+                            "type": "number",
+                            "example": 77.91
+                        }
+                    }
+                },
+                "max": {
+                    "type": "object",
+                    "required": [ "date", "hour", "price" ],
+                    "additionalProperties": false,
+                    "properties": {
+                        "date": {
+                            "type": "string",
+                            "example": "2025-09-21T22:00:00.000Z"
+                        },
+                        "hour": {
+                            "type": "number",
+                            "example": 20
+                        },
+                        "price": {
+                            "type": "number",
+                            "example": 273.31
+                        }
+                    }
+                },
+                "average": {
+                    "type": "number",
+                    "example": 136.187916666667
+                }
+            }
         }
     }
 }

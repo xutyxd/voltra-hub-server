@@ -1,23 +1,45 @@
 <p align="center">
-  <a href="https://github.com/xutyxd/ts-openapi-contract-first-boilerplate">
+  <a href="https://github.com/xutyxd/voltra-hub-server">
     <picture>
-      <source srcset="./ts-contract-first-logo.png" width="150">
-      <img alt="TS Contract First logo" src="./ts-contract-first-logo.png" width="150">
+      <source srcset="./voltra-hub-logo.png" width="150">
+      <img alt="Voltra Hub logo" src="./voltra-hub-logo.png" width="150">
     </picture>
   </a>
 </p>
 
-# Contract-First Boilerplate for TypeScript – Streamline Your API Development
+# Voltra Hub Server
 
-A boilerplate for building contract-first APIs in TypeScript with OpenAPI. Includes OpenAPI definition, compliant server setup, and npm package generation for seamless API development.
+A server for the Voltra Hub API.
 
+## Features
+- OpenAPI definition
+- Compliant server setup
+- NPM package generation for seamless API development
+- Handle ESIOS REE PVPC API without authentication
+
+## Docker Setup
+A docker image is available on [Docker Hub](https://hub.docker.com/r/xutyxd/voltra-hub-server)
+
+All environment variables are optional and will start on 8080 by default.
+Will use memory database by default.
+
+### Usage
+
+```bash
+docker run -d \
+  -p 8080:8080 \
+  -e PORT=8080 \
+  -e MONGODB_URI=mydatabase.example.com \
+  -e MONGODB_DATABASE=voltrahub
+  xutyxd/voltra-hub-server
+```
 
 ## Quick Start Guide
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/xutyxd/ts-openapi-contract-first-boilerplate
-   cd ts-openapi-contract-first-boilerplate
+   git clone https://github.com/xutyxd/voltra-hub-server
+   cd voltra-hub-server
 
 2. **Install dependencies:**
    ```bash
@@ -43,62 +65,6 @@ A boilerplate for building contract-first APIs in TypeScript with OpenAPI. Inclu
    npm run start:local
    ```
 
-## Project Structure
-
-| Folder | Description |
-| ------ | ----------- |
-| **configurations** | Contains configuration files for the server and package |
-| **cucumber.js** | Cucumber configuration file |
-| **package** | Contains the package build configuration and scripts |
-| **public** | Contains the static files for the server |
-| **scripts** | Contains the scripts for the server and package |
-| **src** | Contains the source code for the server and package |
-| **src/openapi** | Contains the OpenAPI definition and specification |
-| **src/openapi/common** | Contains the common models and responses |
-| **src/openapi/crosscutting** | Contains the crosscutting models and responses |
-| **src/openapi/crosscutting/health-check** | Contains the health-check entity **example** |
-| **src/openapi/definition.json** | Contains the OpenAPI definition |
-| **src/package** | Contains the package source code |
-| **src/server** | Contains the server source code |
-| **src/server/app.ts** | Contains the server entry point |
-| **src/server/configuration** | Contains the server configuration |
-| **src/server/crosscutting** | Contains the crosscutting source code |
-| **src/server/crosscutting/common** | Contains the common source code |
-| **tests** | Contains the test files |
-| **tests/functionals** | Contains the functional tests |
-| **tests/units** | Contains the unit tests |
-
-### How to extend the project
-
-1. Define openapi request/responses for new entity
-   - Create the new folder scaffolding the entity
-       ```bash
-       mkdir src/openapi/new-entity
-       mkdir src/openapi/new-entity/examples
-       mkdir src/openapi/new-entity/models
-       mkdir src/openapi/new-entity/paths
-       mkdir src/openapi/new-entity/request
-       ```
-    - Add ref to paths in `definition.json`
-    - Optionally, add ref to components in definition.json
-
-2. Add tests for new entity
-    - Create the new folder scaffolding the entity
-        ```bash
-        mkdir tests/functionals/new-entity
-        mkdir tests/functionals/new-entity/new-entity.feature
-        mkdir tests/functionals/new-entity/new-entity.feature.steps.ts
-        ```
-
-        mkdir tests/units/new-entity
-
-3. Finally, add the new entity to the server
-    - Run next command to scaffold the entity
-        ```bash
-        npm run entity:scaffold new-entity
-        ```
-    - `src/server/app.ts` Add the new entity to the container
-
 ## Dependencies
 Check dependencies for more documentation
 - [Node.js](https://nodejs.org/en/) (v21.6.2)
@@ -107,6 +73,8 @@ Check dependencies for more documentation
 - [InversifyJS](https://github.com/inversify/InversifyJS) (v6.0.2)
 - [OpenAPI Fetch](https://github.com/xutyxd/openapi-fetch) (v0.12.0)
 - [Ajv](https://github.com/ajv-validator/ajv) (v8.17.1)
+- [MongoDB](https://www.mongodb.com/) (v6.0.1)
+- [ESIOS API Client](https://github.com/xutyxd/esios-api-client) (v1.1.6)
 
 ## License
 

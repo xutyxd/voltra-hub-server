@@ -3,13 +3,15 @@ import assert from "node:assert";
 import { When, Then, Given } from "@cucumber/cucumber";
 
 import { App } from '../../../../src/server/app';
-import { ContractFirstAPIClient } from '../../../../src/package';
+import { VoltraHubAPIClient } from '../../../../src/package';
 
 process.env.PORT = "0";
-
+// Create app
 const app = new App();
-const client = new ContractFirstAPIClient(`http://localhost:${app.server.port}`);
-let request: ReturnType<ContractFirstAPIClient["healthCheck"]>;
+// Start app
+app.start();
+const client = new VoltraHubAPIClient(`http://localhost:${app.server.port}`);
+let request: ReturnType<VoltraHubAPIClient["healthCheck"]>;
 let response: Awaited<typeof request>;
 
 Given("I perform a fetch to {string}", (path) => {

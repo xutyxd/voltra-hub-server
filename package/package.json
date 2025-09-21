@@ -1,7 +1,7 @@
 {
-    "name": "voltra-hub-server",
+    "name": "voltra-hub-api-client",
     "version": "1.0.0",
-    "description": "A boilerplate for building contract-first APIs in TypeScript with OpenAPI. Includes OpenAPI definition, compliant server setup, and npm package generation for seamless API development.",
+    "description": "A Voltra Hub API Client",
     "type": "module",
     "main": "cjs/index.js",
     "module": "mjs/index.js",

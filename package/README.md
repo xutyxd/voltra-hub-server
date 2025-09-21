@@ -1,45 +1,44 @@
 <p align="center">
-  <a href="https://github.com/xutyxd/ts-openapi-contract-first-boilerplate">
-    <picture>
-      <source srcset="../ts-contract-first-logo.png" width="150">
-      <img alt="TS Contract First logo" src="./ts-contract-first-logo.png" width="150">
+  <a href="https://github.com/xutyxd/voltra-hub-server">    <picture>
+      <source srcset="../voltra-hub-logo.png" width="150">
+      <img alt="TS Contract First logo" src="./voltra-hub-logo.png" width="150">
     </picture>
   </a>
 </p>
 
 <h1 align="center">
-  Client to interact with the TS Server concract first API
+  Client to interact with Voltra Hub API
 </h1>
 
 <p align="left">
-    <img src="https://img.shields.io/npm/dw/ts-openapi-contract-first-boilerplate"/>
-    <img alt="NPM Unpacked Size" src="https://img.shields.io/npm/unpacked-size/ts-openapi-contract-first-boilerplate">
-    <img alt="npm bundle size" src="https://img.shields.io/bundlephobia/min/ts-openapi-contract-first-boilerplate">
-    <img alt="NPM Version" src="https://img.shields.io/npm/v/ts-openapi-contract-first-boilerplate">
+    <img src="https://img.shields.io/npm/dw/voltra-hub-server">
+    <img alt="NPM Unpacked Size" src="https://img.shields.io/npm/unpacked-size/voltra-hub-server">
+    <img alt="npm bundle size" src="https://img.shields.io/bundlephobia/min/voltra-hub-server">
+    <img alt="NPM Version" src="https://img.shields.io/npm/v/voltra-hub-server">
 </p>
 
-# Contract-First Boilerplate for TypeScript – Streamline Your API Development
+# Voltra Hub Server
 
-A boilerplate for building contract-first APIs in TypeScript with OpenAPI. Includes OpenAPI definition, compliant server setup, and npm package generation for seamless API development.
+OpenAPI package for Voltra Hub API.
 
 ## 📦 Packages
 
 ### 📦 CommonJS
 
 ```js
-const { ContractFirstAPIClient } = require('ts-openapi-contract-first-boilerplate');
+const { VoltraHubAPIClient } = require('voltra-hub-api-client');
 ```
 
 ### 📦 ESM
 
 ```js
-import { ContractFirstAPIClient } from 'ts-openapi-contract-first-boilerplate';
+import { VoltraHubAPIClient } from 'voltra-hub-api-client';
 ```
 
 ### 📦 TypeScript
 
 ```ts
-import { ContractFirstAPIClient } from 'ts-openapi-contract-first-boilerplate';
+import { VoltraHubAPIClient } from 'voltra-hub-api-client';
 ```
 
 ## 📝 License
