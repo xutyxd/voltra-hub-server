@@ -68,6 +68,13 @@ class App {
     public start() {
         const appContainer = this.appContainer;
         const httpServer = this.server;
+        // Check database
+        try {
+            appContainer.get<IDatabase<unknown & IEntityModelData>>('IDatabase');
+        } catch {
+            // Set memory database
+            this.set.database();
+        }
         // Services
         const configurationService = appContainer.get(ConfigurationService);
          // Set keys for cookies
