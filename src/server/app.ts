@@ -12,8 +12,10 @@ import { IDatabase } from './crosscutting/database/interfaces/database.interface
 import { MemoryDatabaseService } from './crosscutting/database/services/memory-database.service';
 import { HealthCheckContainer, HealthCheckController } from "./crosscutting/health-check";
 import { PVPCContainer, PVPCController } from './pvpc';
+import { IDatabaseStatic } from './crosscutting/database/interfaces';
 
-const App = class {
+class App {
+    private appContainer;
     public server: HTTPServer;
 
     constructor() {
@@ -30,16 +32,8 @@ const App = class {
         const appContainer = Container.merge(container, ...containers);
         // Skip base class checks
         appContainer.options = { skipBaseClassChecks: true };
-        // Services
-        const configurationService = appContainer.get(ConfigurationService);
-        // Set database
-        appContainer.bind<IDatabase<unknown & IEntityModelData>>('IDatabase').to(MemoryDatabaseService).inSingletonScope();
-        // Get database
-        const databaseService = appContainer.get<IDatabase<unknown & IEntityModelData>>('IDatabase');
-        databaseService.connection.open();
-        // Controllers
-        const healthCheckController = appContainer.get(HealthCheckController);
-        const pvpcController = appContainer.get(PVPCController);
+        // Save ref of container
+        this.appContainer = appContainer;
 
         const port = process.env.PORT ? parseInt(process.env.PORT) : 8080;
         const httpServer = new HTTPServer(port, Response);
@@ -48,17 +42,42 @@ const App = class {
             key: "Access-Control-Allow-origin",
             value: "*"
         });
-        // Set keys for cookies
-        httpServer.keys = (configurationService.keys.cookies()) as string[];
-        // Set actions
-        // Set actions before request
-        // Set actions after request
-        // Set controllers
-        httpServer.controllers.add(healthCheckController);
-        httpServer.controllers.add(pvpcController);
         this.server = httpServer;
 
         console.log(`App started in ${new Date().getTime() - start}ms`);
+    }
+
+    public set = {
+        // auth: () => {
+        //     const appContainer = this.appContainer;
+        //     // Actions pre-request
+        //     const setAuthAction = appContainer.get(SetAuthAction);
+        //     // Set actions before request
+        //     this.server.request.before.add(setAuthAction);
+        // },
+        database: (database: IDatabaseStatic = MemoryDatabaseService, configuration?: unknown) => {
+            const appContainer = this.appContainer;
+            // Set database
+            appContainer.bind<IDatabase<unknown & IEntityModelData>>('IDatabase').to(database).inSingletonScope();
+            // Get database
+            const databaseService = appContainer.get<IDatabase<unknown & IEntityModelData>>('IDatabase');
+            databaseService.connection.open(configuration);
+        }
+    }
+
+    public start() {
+        const appContainer = this.appContainer;
+        const httpServer = this.server;
+        // Services
+        const configurationService = appContainer.get(ConfigurationService);
+         // Set keys for cookies
+         httpServer.keys = (configurationService.keys.cookies()) as string[];
+         // Controllers
+        const healthCheckController = appContainer.get(HealthCheckController);
+        const pvpcController = appContainer.get(PVPCController);
+        // Set controllers
+        httpServer.controllers.add(healthCheckController);
+        httpServer.controllers.add(pvpcController);
     }
 }
 
