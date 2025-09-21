@@ -11,6 +11,7 @@ import { Response } from "./crosscutting/common/responses/response.class";
 import { IDatabase } from './crosscutting/database/interfaces/database.interface';
 import { MemoryDatabaseService } from './crosscutting/database/services/memory-database.service';
 import { HealthCheckContainer, HealthCheckController } from "./crosscutting/health-check";
+import { PVPCContainer, PVPCController } from './pvpc';
 
 const App = class {
     public server: HTTPServer;
@@ -23,6 +24,7 @@ const App = class {
             ConfigurationContainer,
             HealthCheckContainer,
             CommonContainer,
+            PVPCContainer,
         ];
         // Merge containers
         const appContainer = Container.merge(container, ...containers);
@@ -37,6 +39,7 @@ const App = class {
         databaseService.connection.open();
         // Controllers
         const healthCheckController = appContainer.get(HealthCheckController);
+        const pvpcController = appContainer.get(PVPCController);
 
         const port = process.env.PORT ? parseInt(process.env.PORT) : 8080;
         const httpServer = new HTTPServer(port, Response);
@@ -52,6 +55,7 @@ const App = class {
         // Set actions after request
         // Set controllers
         httpServer.controllers.add(healthCheckController);
+        httpServer.controllers.add(pvpcController);
         this.server = httpServer;
 
         console.log(`App started in ${new Date().getTime() - start}ms`);

@@ -2,6 +2,7 @@ import { injectable } from "inversify";
 import { InternalError, NotFoundError } from "../../common/errors";
 import { IEntityModelData } from "../../common/interfaces/data";
 import { IDatabase, IDbQueryWhere, IIndexDbQueryWhere } from "../interfaces";
+import { DbWhereOperands } from "../enums/db-where-operands.enum";
 
 @injectable()
 export class MemoryDatabaseService<MD extends IEntityModelData> implements IDatabase<MD> {
@@ -56,7 +57,14 @@ export class MemoryDatabaseService<MD extends IEntityModelData> implements IData
             throw new InternalError('Database not connected');
         }
 
-        return this.data[from]?.filter((item) => wheres.every((where) => item)) || [];
+        return this.data[from]?.filter((item) => wheres.every(({A: property, B: value, op}) => {
+            let filtered = true;
+            if (op === DbWhereOperands.EQUALS) {
+                filtered = item[property] === value;
+            }
+
+            return filtered;
+        })) || [];
     }
 
     public async update(from: string, toIndex: IIndexDbQueryWhere<MD>, data: MD): Promise<MD> {

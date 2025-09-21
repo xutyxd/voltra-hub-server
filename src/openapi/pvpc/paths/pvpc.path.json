@@ -1,0 +1,55 @@
+{
+    "get": {
+        "tags": [ "PVPC" ],
+        "summary": "Get a PVPC price for a given date",
+        "parameters": [
+            {
+                "name": "date",
+                "in": "query",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "format": "date"
+                }
+            }
+        ],
+        "responses": {
+            "200": {
+                "description": "Correct response",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "example": {
+                                "$ref": "../examples/pvpc.example.json"
+                            },
+                            "allOf": [
+                                {
+                                    "$ref": "../../common/response.model.json"
+                                },
+                                {
+                                    "type": "object",
+                                    "required": ["data"],
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "../models/pvpc.model.json"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "500": {
+                "description": "Internal server error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../common/internal-server-error-response.model.json"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
