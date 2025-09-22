@@ -4,8 +4,9 @@ import { EntityController } from '../../crosscutting/common';
 import { IPVPCAPIData, IPVPCData, IPVPCModelData } from '../interfaces/data';
 import { PVPCService } from '../services/pvpc.service';
 import { PVPCAPI } from '../classes';
-import { BadRequestResponse } from '../../crosscutting/common/responses';
+import { BadRequestResponse, InternalErrorResponse } from '../../crosscutting/common/responses';
 import { DbWhereOperands } from '../../crosscutting/database/enums/db-where-operands.enum';
+import { BaseError, InternalError } from '../../crosscutting/common/errors';
 
 @injectable()
 export class PVPCController extends EntityController<IPVPCAPIData, IPVPCData, IPVPCModelData> implements IHTTPController {
@@ -58,8 +59,19 @@ export class PVPCController extends EntityController<IPVPCAPIData, IPVPCData, IP
         if (!date || typeof date !== 'string' || !this.isValidISODate(date)) {
             throw new BadRequestResponse('Invalid date property', context);
         }
-        // Get first one, there should only be one
-        const [ pvpc ] = await this.pvpcService.list([{ A: 'date', op: DbWhereOperands.EQUALS, B: date }], context);
+        let pvpc: IPVPCData;
+        try {
+            // Get first one, there should only be one
+            const [ pvpcFound ] = await this.pvpcService.list([{ A: 'date', op: DbWhereOperands.EQUALS, B: date }], context);
+            // Transform to API
+            pvpc = pvpcFound;
+        } catch (error) {
+            if (error instanceof BaseError) {
+                throw error;
+            }
+
+            throw new InternalErrorResponse('Error getting PVPC', context);
+        }
         // Transform to API
         const transformed = PVPCAPI.fromDomain(pvpc);
         // Return it

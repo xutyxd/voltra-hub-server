@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/xutyxd/voltra-hub-server">    <picture>
+  <a href="https://github.com/xutyxd/voltra-hub-api-client">    <picture>
       <source srcset="../voltra-hub-logo.png" width="150">
       <img alt="TS Contract First logo" src="./voltra-hub-logo.png" width="150">
     </picture>
@@ -11,10 +11,10 @@
 </h1>
 
 <p align="left">
-    <img src="https://img.shields.io/npm/dw/voltra-hub-server">
-    <img alt="NPM Unpacked Size" src="https://img.shields.io/npm/unpacked-size/voltra-hub-server">
-    <img alt="npm bundle size" src="https://img.shields.io/bundlephobia/min/voltra-hub-server">
-    <img alt="NPM Version" src="https://img.shields.io/npm/v/voltra-hub-server">
+    <img src="https://img.shields.io/npm/dw/voltra-hub-api-client">
+    <img alt="NPM Unpacked Size" src="https://img.shields.io/npm/unpacked-size/voltra-hub-api-client">
+    <img alt="npm bundle size" src="https://img.shields.io/bundlephobia/min/voltra-hub-api-client">
+    <img alt="NPM Version" src="https://img.shields.io/npm/v/voltra-hub-api-client">
 </p>
 
 # Voltra Hub Server
@@ -40,6 +40,22 @@ import { VoltraHubAPIClient } from 'voltra-hub-api-client';
 ```ts
 import { VoltraHubAPIClient } from 'voltra-hub-api-client';
 ```
+
+## Usage
+
+```ts
+import { VoltraHubAPIClient } from 'voltra-hub-api-client';
+
+const client = new VoltraHubAPIClient('https://voltrahub.com/api');
+// Check if the server is up
+const healthCheck = await client.healthCheck();
+console.log(healthCheck);
+
+// Get PVPC for today
+const pvpcToday = await client.pvpc.get(new Date());
+console.log(pvpcToday);
+```
+
 
 ## 📝 License
 
