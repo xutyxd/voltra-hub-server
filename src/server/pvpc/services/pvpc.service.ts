@@ -1,12 +1,14 @@
 import { inject, injectable } from "inversify";
+
+import { IHTTPContextData } from "server-over-express";
+import { ESIOSApiClient } from "esios-api-client";
+
 import { EntityService } from "../../crosscutting/common/services";
+import { IDbQueryWhere } from "../../crosscutting/database/interfaces";
+
 import { PVPC } from "../classes/pvpc.class";
 import { IPVPCAPIData, IPVPCData, IPVPCModelData } from "../interfaces/data";
 import { PVPCRepository } from "../repository/pvpc.repository";
-import { IHTTPContextData } from "server-over-express";
-import { IDbQueryWhere } from "../../crosscutting/database/interfaces";
-import { ESIOSApiClient } from "esios-api-client";
-
 @injectable()
 export class PVPCService extends EntityService<IPVPCAPIData, IPVPCData, IPVPCModelData> {
 

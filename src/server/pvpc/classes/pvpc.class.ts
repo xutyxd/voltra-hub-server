@@ -8,6 +8,7 @@ export class PVPC extends Entity implements IPVPC {
     public date: string;
     public general: PVPCDayZoned;
     public special: PVPCDayZoned;
+    public raw: PVPCDay;
 
     constructor(data: Partial<IPVPCData>) {
         super(data);
@@ -24,9 +25,14 @@ export class PVPC extends Entity implements IPVPC {
             throw new Error('Special PVPC is required');
         }
 
+        if (!data.raw) {
+            throw new Error('Raw PVPC information is required');
+        }
+
         this.date = data.date;
         this.general = new PVPCDayZoned(data.general);
         this.special = new PVPCDayZoned(data.special);
+        this.raw = data.raw;
     }
 
     public toApi() {
@@ -86,6 +92,7 @@ export class PVPC extends Entity implements IPVPC {
             date: this.date,
             general: this.general.hours.map(({ raw }) => raw),
             special: this.special.hours.map(({ raw }) => raw),
+            raw: this.raw
         };
     }
 
@@ -97,6 +104,7 @@ export class PVPC extends Entity implements IPVPC {
             date: this.date,
             general: this.general.hours.map(({ raw }) => raw),
             special: this.special.hours.map(({ raw }) => raw),
+            raw: this.raw
         };
     }
 
@@ -125,6 +133,7 @@ export class PVPC extends Entity implements IPVPC {
                     day: [day, month, year].join('/')
                 };
             }),
+            raw: pvpcDay
         });
     }
 
@@ -148,6 +157,7 @@ export class PVPC extends Entity implements IPVPC {
                     day: [day, month, year].join('/')
                 };
             }),
+            raw: entity.raw
         });
     }
 }
