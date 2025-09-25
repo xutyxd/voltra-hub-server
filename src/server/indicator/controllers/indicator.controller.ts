@@ -73,7 +73,7 @@ export class IndicatorController extends EntityController<IIndicatorAPIData, IIn
     public async spot(request: HTTPRequest, context: IHTTPContextData) {
         const { date } = request.query;
 
-        if (!date || typeof date !== 'string' || !this.isValidISODate(date)) {
+        if (!date || typeof date !== 'string' || !isValidISODate(date)) {
             throw new BadRequestResponse('Invalid date property', context);
         }
         let indicator: IIndicatorData;

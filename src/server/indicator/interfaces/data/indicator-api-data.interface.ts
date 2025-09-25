@@ -1,5 +1,14 @@
 import { IEntityAPIData } from "../../../crosscutting/common/interfaces/data";
 
 export interface IIndicatorAPIData extends IEntityAPIData {
-    propertyA: string;
+    geos: number[];
+    values: {
+        value: number;
+        dates: {
+            utc: string;
+            local: string;
+        };
+        geo: number;
+    }[],
+    updatedESIOS: string;
 }

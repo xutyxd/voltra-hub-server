@@ -5,5 +5,5 @@ export interface IPVPCModelData extends IEntityModelData {
     date: string;
     general: IPVPCHourNormalized[];
     special: IPVPCHourNormalized[];
-    raw: PVPCDay;
+    raw: InstanceType<typeof PVPCDay>;
 }

@@ -4,12 +4,22 @@ import { IIndicatorModel } from "../interfaces/dto";
 
 export class IndicatorModel extends EntityModel implements IIndicatorModel {
 
-    public property_a;
+    public indicator_id;
+    public date;
+    public geos;
+    public values;
+    public updated_esios;
+    public raw;
 
     constructor(data: IIndicatorModelData) {
         super(data);
 
-        this.property_a = data.property_a;
+        this.indicator_id = data.indicator_id;
+        this.date = data.date;
+        this.geos = data.geos;
+        this.values = data.values;
+        this.updated_esios = data.updated_esios;
+        this.raw = data.raw;
     }
 
     public toDomain() {
@@ -17,7 +27,12 @@ export class IndicatorModel extends EntityModel implements IIndicatorModel {
 
         return {
             ...base,
-            propertyA: this.property_a
+            indicatorId: this.indicator_id,
+            date: this.date,
+            geos: this.geos,
+            values: this.values,
+            updatedESIOS: this.updated_esios,
+            raw: this.raw
         };
     }
 
@@ -26,7 +41,12 @@ export class IndicatorModel extends EntityModel implements IIndicatorModel {
 
         return {
             ...base,
-            property_a: this.property_a
+            indicator_id: this.indicator_id,
+            date: this.date,
+            geos: this.geos,
+            values: this.values,
+            updated_esios: this.updated_esios,
+            raw: this.raw
         };
     }
 
@@ -35,7 +55,12 @@ export class IndicatorModel extends EntityModel implements IIndicatorModel {
 
         return new IndicatorModel({
             ...base,
-            property_a: entity.propertyA
+            indicator_id: entity.indicatorId,
+            date: entity.date,
+            geos: entity.geos,
+            values: entity.values,
+            updated_esios: entity.updatedESIOS,
+            raw: entity.raw
         });
     }
 
@@ -44,7 +69,12 @@ export class IndicatorModel extends EntityModel implements IIndicatorModel {
 
         return new IndicatorModel({
             ...base,
-            property_a: entity.property_a
+            indicator_id: entity.indicator_id,
+            date: entity.date,
+            geos: entity.geos,
+            values: entity.values,
+            updated_esios: entity.updated_esios,
+            raw: entity.raw
         });
     }
 }

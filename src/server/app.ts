@@ -5,14 +5,18 @@ import { HTTPServer } from "server-over-express";
 
 import { ConfigurationContainer } from "./configuration";
 import { ConfigurationService } from "./configuration/services/configuration.service";
+
 import { CommonContainer } from './crosscutting/common';
 import { IEntityModelData } from './crosscutting/common/interfaces/data';
 import { Response } from "./crosscutting/common/responses/response.class";
 import { IDatabase } from './crosscutting/database/interfaces/database.interface';
 import { MemoryDatabaseService } from './crosscutting/database/services/memory-database.service';
-import { HealthCheckContainer, HealthCheckController } from "./crosscutting/health-check";
-import { PVPCContainer, PVPCController } from './pvpc';
 import { IDatabaseStatic } from './crosscutting/database/interfaces';
+
+import { HealthCheckContainer, HealthCheckController } from "./crosscutting/health-check";
+import { IndicatorContainer, IndicatorController } from './indicator';
+import { PVPCContainer, PVPCController } from './pvpc';
+
 
 class App {
     private appContainer;
@@ -26,6 +30,7 @@ class App {
             ConfigurationContainer,
             HealthCheckContainer,
             CommonContainer,
+            IndicatorContainer,
             PVPCContainer,
         ];
         // Merge containers
@@ -81,9 +86,11 @@ class App {
          httpServer.keys = (configurationService.keys.cookies()) as string[];
          // Controllers
         const healthCheckController = appContainer.get(HealthCheckController);
+        const indicatorController = appContainer.get(IndicatorController);
         const pvpcController = appContainer.get(PVPCController);
         // Set controllers
         httpServer.controllers.add(healthCheckController);
+        httpServer.controllers.add(indicatorController);
         httpServer.controllers.add(pvpcController);
     }
 }

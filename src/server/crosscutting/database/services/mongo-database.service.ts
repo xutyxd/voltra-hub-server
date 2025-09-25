@@ -19,6 +19,7 @@ export class MongoDatabaseService <MD extends IEntityModelData> implements IData
         open: async (configuration: { uri: string, database: string }) => {
             const { uri, database } = configuration;
             const client = new MongoClient(uri);
+
             try {
                 await client.connect();
                 this.db = client.db(database);
@@ -36,10 +37,29 @@ export class MongoDatabaseService <MD extends IEntityModelData> implements IData
 
     constructor() { }
 
+    public table = {
+        create: async (from: string) => {
+            if (!this.connected || !this.db) {
+                throw new InternalError('Database not connected');
+            }
+
+            await this.db.createCollection(from);
+        },
+        drop: async (from: string) => {
+            if (!this.connected || !this.db) {
+                throw new InternalError('Database not connected');
+            }
+
+            const collection = this.db.collection(from);
+            await collection.drop();
+        }
+    }
+
     public async insert(from: string, data: MD): Promise<MD> {
         if (!this.connected || !this.db) {
             throw new InternalError('Database not connected');
         }
+
         const collection = this.db.collection(from);
         const inserted = await collection.insertOne(data);
         

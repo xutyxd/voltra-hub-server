@@ -4,12 +4,16 @@ import { IIndicatorAPI } from "../interfaces/dto";
 
 export class IndicatorAPI extends EntityAPI implements IIndicatorAPI {
     
-    public propertyA;
+    public geos;
+    public values;
+    public updatedESIOS;
 
     constructor(data: IIndicatorAPIData) {
         super(data);
 
-        this.propertyA = data.propertyA;
+        this.geos = data.geos;
+        this.values = data.values;
+        this.updatedESIOS = data.updatedESIOS;
     }
 
     public toApi() {
@@ -17,17 +21,14 @@ export class IndicatorAPI extends EntityAPI implements IIndicatorAPI {
 
         return {
             ...base,
-            propertyA: this.propertyA
+            geos: this.geos,
+            values: this.values,
+            updatedESIOS: this.updatedESIOS,
         };
     }
 
-    public toDomain() {
-        const base = super.toDomain();
-
-        return {
-            ...base,
-            propertyA: this.propertyA
-        };
+    public toDomain(): IIndicatorData {
+        throw new Error('Forbidden');
     }
 
     public static fromDomain(entity: IIndicatorData) {

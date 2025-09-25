@@ -7,6 +7,7 @@ import { IIndicator } from "../interfaces/dto";
 export class Indicator extends Entity implements IIndicator {
 
     public indicatorId;
+    public date;
     public geos;
     public values;
     public updatedESIOS;
@@ -36,6 +37,7 @@ export class Indicator extends Entity implements IIndicator {
         }
 
         this.indicatorId = data.indicatorId;
+        this.date = data.values[0].dates.local.split('T')[0]; // Added to search
         this.geos = data.geos;
         this.values = data.values;
         this.updatedESIOS = data.updatedESIOS;
@@ -59,6 +61,7 @@ export class Indicator extends Entity implements IIndicator {
         return {
             ...base,
             indicatorId: this.indicatorId,
+            date: this.date,
             geos: this.geos,
             values: this.values,
             updatedESIOS: this.updatedESIOS,
@@ -72,6 +75,7 @@ export class Indicator extends Entity implements IIndicator {
         return {
             ...base,
             indicator_id: this.indicatorId,
+            date: this.date,
             geos: this.geos,
             values: this.values,
             updated_esios: this.updatedESIOS,
@@ -79,7 +83,7 @@ export class Indicator extends Entity implements IIndicator {
         };
     }
 
-    public static fromAPI(entity: IIndicatorAPIData) {
+    public static fromAPI(entity: IIndicatorAPIData): Indicator {
         throw new Error('Forbidden');
     }
 
@@ -92,9 +96,9 @@ export class Indicator extends Entity implements IIndicator {
                     value,
                     dates: {
                         utc: dates.utc,
-                        local: dates.local,
-                        geo
-                    }
+                        local: dates.local
+                    },
+                    geo
                 };
             }),
             updatedESIOS: indicator.updatedAt,

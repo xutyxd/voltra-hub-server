@@ -25,13 +25,25 @@ export class MemoryDatabaseService<MD extends IEntityModelData> implements IData
         }
     }
 
+    public table = {
+        create: async (from: string) => {
+            this.data[from] = [];
+        },
+        drop: async (from: string) => {
+            delete this.data[from];
+        }
+    }
+
     public async insert(from: string, data: MD): Promise<MD> {
 
         if (!this.connected) {
             throw new InternalError('Database not connected');
         }
 
-        this.data[from] ??= [];
+        if (!this.data[from]) {
+            throw new InternalError('Table not created');
+        }
+
         this.data[from].push({
             ...data,
             id: this.data[from].length + 1

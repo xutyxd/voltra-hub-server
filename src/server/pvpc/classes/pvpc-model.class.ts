@@ -7,6 +7,7 @@ export class PVPCModel extends EntityModel implements IPVPCModel {
     public date;
     public general;
     public special;
+    public raw;
 
     constructor(data: IPVPCModelData) {
         super(data);
@@ -14,6 +15,7 @@ export class PVPCModel extends EntityModel implements IPVPCModel {
         this.date = data.date;
         this.general = data.general;
         this.special = data.special;
+        this.raw = data.raw;
     }
 
     public toDomain() {
@@ -23,7 +25,8 @@ export class PVPCModel extends EntityModel implements IPVPCModel {
             ...base,
             date: this.date,
             general: this.general,
-            special: this.special
+            special: this.special,
+            raw: this.raw
         };
     }
 
@@ -34,7 +37,8 @@ export class PVPCModel extends EntityModel implements IPVPCModel {
             ...base,
             date: this.date,
             general: this.general,
-            special: this.special
+            special: this.special,
+            raw: this.raw
         };
     }
 
@@ -45,7 +49,8 @@ export class PVPCModel extends EntityModel implements IPVPCModel {
             ...base,
             date: entity.date,
             general: entity.general,
-            special: entity.special
+            special: entity.special,
+            raw: entity.raw
         });
     }
 
@@ -56,7 +61,8 @@ export class PVPCModel extends EntityModel implements IPVPCModel {
             ...base,
             date: entity.date,
             general: entity.general,
-            special: entity.special
+            special: entity.special,
+            raw: entity.raw
         });
     }
 }

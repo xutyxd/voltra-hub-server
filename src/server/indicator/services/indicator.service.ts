@@ -8,6 +8,7 @@ import { DbWhereOperands } from "../../crosscutting/database/enums/db-where-oper
 import { Indicator } from "../classes/indicator.class";
 import { IIndicatorAPIData, IIndicatorData, IIndicatorModelData } from "../interfaces/data";
 import { IndicatorRepository } from "../repository/indicator.repository";
+import { IDbQueryWhere } from "../../crosscutting/database/interfaces";
 
 @injectable()
 export class IndicatorService extends EntityService<IIndicatorAPIData, IIndicatorData, IIndicatorModelData> {
@@ -20,20 +21,20 @@ export class IndicatorService extends EntityService<IIndicatorAPIData, IIndicato
 
     private async it(indicatorId: `${number}`, date: string, geo: Geo) {
         // Create query
-        const where = [
+        const where: IDbQueryWhere<IIndicatorModelData>[] = [
             {
                 A: 'date',
                 op: DbWhereOperands.EQUALS,
                 B: date
             },
             {
-                A: 'indicator',
+                A: 'indicator_id',
                 op: DbWhereOperands.EQUALS,
                 B: Number(indicatorId)
             },
             {
-                A: 'geo',
-                op: DbWhereOperands.EQUALS,
+                A: 'geos',
+                op: DbWhereOperands.IN,
                 B: geo
             }
         ];
