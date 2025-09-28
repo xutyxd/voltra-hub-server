@@ -1,0 +1,56 @@
+{
+    "type": "object",
+    "required": ["uuid", "createdAt", "updatedAt", "geos", "values"],
+    "additionalProperties": false,
+    "properties": {
+        "uuid": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "createdAt": {
+            "type": "integer",
+            "format": "int64"
+        },
+        "updatedAt": {
+            "type": "integer",
+            "format": "int64"
+        },
+        "geos": {
+            "type": "array",
+            "items": {
+                "type": "integer"
+            }
+        },
+        "values": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": ["value", "dates", "geo"],
+                "additionalProperties": false,
+                "properties": {
+                    "value": {
+                        "type": "number"
+                    },
+                    "dates": {
+                        "type": "object",
+                        "required": ["utc", "local"],
+                        "additionalProperties": false,
+                        "properties": {
+                            "utc": {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            "local": {
+                                "type": "string",
+                                "format": "date-time"
+                            }
+                        }
+                    },
+                    "geo": {
+                        "type": "integer"
+                    }
+                }
+            }
+        }
+    }
+}

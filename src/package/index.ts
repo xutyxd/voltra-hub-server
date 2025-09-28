@@ -39,9 +39,26 @@ export class VoltraHubAPIClient {
         get: (date: Date) => {
             const year = date.getFullYear();
             const month = `${date.getMonth() + 1}`.padStart(2, '0');
-            const day = date.getDate();
+            const day = `${date.getDate()}`.padStart(2, '0');
 
             return this.client.GET('/pvpc', { params: { query: { date: [year, month, day].join('-') } } });
+        }
+    }
+
+    public indicator = {
+        pvpc: (date: Date) => {
+            const year = date.getFullYear();
+            const month = `${date.getMonth() + 1}`.padStart(2, '0');
+            const day = `${date.getDate()}`.padStart(2, '0');
+
+            return this.client.GET('/indicator/pvpc', { params: { query: { date: [year, month, day].join('-') } } });            
+        },
+        spot: (date: Date) => {
+            const year = date.getFullYear();
+            const month = `${date.getMonth() + 1}`.padStart(2, '0');
+            const day = `${date.getDate()}`.padStart(2, '0');
+
+            return this.client.GET('/indicator/spot', { params: { query: { date: [year, month, day].join('-') } } });
         }
     }
 }

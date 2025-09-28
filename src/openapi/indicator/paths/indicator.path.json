@@ -1,0 +1,55 @@
+{
+    "get": {
+        "tags": [ "Indicator" ],
+        "summary": "Get a indicator for a given date",
+        "parameters": [
+            {
+                "name": "date",
+                "in": "query",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "format": "date"
+                }
+            }
+        ],
+        "responses": {
+            "200": {
+                "description": "Correct response",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "example": {
+                                "$ref": "../examples/indicator.example.json"
+                            },
+                            "allOf": [
+                                {
+                                    "$ref": "../../common/response.model.json"
+                                },
+                                {
+                                    "type": "object",
+                                    "required": ["data"],
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "../models/indicator.model.json"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "500": {
+                "description": "Internal server error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../common/internal-server-error-response.model.json"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

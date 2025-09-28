@@ -27,6 +27,12 @@
         },
         "/pvpc": {
             "$ref": "./pvpc/paths/pvpc.path.json"
+        },
+        "/indicator/pvpc": {
+            "$ref": "./indicator/paths/indicator.path.json"
+        },
+        "/indicator/spot": {
+            "$ref": "./indicator/paths/indicator.path.json"
         }
     },
     "components": {
