@@ -78,10 +78,10 @@ export class IndicatorController extends EntityController<IIndicatorAPIData, IIn
         }
         let indicator: IIndicatorData;
         try {
-             // Get first one, there should only be one
-             const indicatorFound = await this.indicatorService.spot(date);
-             // Transform to API
-             indicator = indicatorFound;
+            // Get first one, there should only be one
+            const indicatorFound = await this.indicatorService.spot(date);
+            // Transform to API
+            indicator = indicatorFound;
         } catch (error) {
             if (error instanceof BaseError) {
                 throw error;

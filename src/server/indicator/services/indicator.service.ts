@@ -59,7 +59,7 @@ export class IndicatorService extends EntityService<IIndicatorAPIData, IIndicato
     }
 
     public async pvpc(date: string) {
-        return this.it(IndicatorID.PVPC, date, Geo.ES);
+        return this.it(IndicatorID.PVPC, date, Geo.PENINSULA);
     }
 
     public async spot(date: string) {
