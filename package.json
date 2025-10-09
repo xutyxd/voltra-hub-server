@@ -1,7 +1,7 @@
 {
   "name": "voltra-hub-server",
   "version": "1.0.0",
-  "description": "A server for manage ESIOS PVPC 2.0 TD",
+  "description": "A server for manage ESIOS information",
   "scripts": {
     "tsc": "tsc --noEmit",
     "entity:scaffold": "bash ./scripts/schematics/entity-scaffolding.sh",

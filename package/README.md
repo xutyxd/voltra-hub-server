@@ -54,6 +54,14 @@ console.log(healthCheck);
 // Get PVPC for today
 const pvpcToday = await client.pvpc.get(new Date());
 console.log(pvpcToday);
+
+// Get PVPC as indicator for a specific date
+const pvpcDate = await client.indicator.pvpc.get(new Date('2025-09-01'));
+console.log(pvpcDate);
+
+// Get Spot for today
+const spotToday = await client.indicator.spot.get(new Date());
+console.log(spotToday);
 ```
 
 
